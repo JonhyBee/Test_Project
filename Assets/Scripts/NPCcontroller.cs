@@ -8,7 +8,7 @@ public class NPCcontroller: MonoBehaviour
 {
 
     public static float deltaTime;
-    public float movespeed;
+    public float speed;
     private Rigidbody2D myRigidbody;
 
     public bool isWalking;
@@ -30,8 +30,6 @@ public class NPCcontroller: MonoBehaviour
 
         a = GetComponent<Animator>();
 
-        myRigidbody = GetComponent<Rigidbody2D>();
-
         waitCounter = waitTime;
         walkCounter = walkTime;
 
@@ -50,8 +48,8 @@ public class NPCcontroller: MonoBehaviour
             {
                 case 0: // Up
                     a.SetBool("Walking", true);
-                    myRigidbody.velocity = new Vector2(0, movespeed);
-                    
+                    transform.Translate(Vector2.up * speed);
+
                     break;
 
                 case 1: // Right
@@ -60,14 +58,14 @@ public class NPCcontroller: MonoBehaviour
                         Flip();
                     }
                     a.SetBool("Walking", true);
-                    myRigidbody.velocity = new Vector2(movespeed, 0);
+                    transform.Translate(Vector2.right * speed);
 
                     break;
 
                 case 2:  // Down
                     a.SetBool("Walking", true);
-                    myRigidbody.velocity = new Vector2(0, -movespeed);
-                    
+                    transform.Translate(Vector2.down * speed);
+
                     break;
 
                 case 3: // Left                    
@@ -76,13 +74,14 @@ public class NPCcontroller: MonoBehaviour
                         Flip();
                     }
                     a.SetBool("Walking", true);
-                    myRigidbody.velocity = new Vector2(-movespeed, 0);
+                    transform.Translate(Vector2.left * speed);
 
                     break;
             }
 
             if (walkCounter < 0)
             {
+                a.SetBool("Walking", false);
                 isWalking = false;
                 waitCounter = waitTime;
             }
@@ -91,7 +90,7 @@ public class NPCcontroller: MonoBehaviour
 
         else
         {
-            a.SetBool("Walking", false);
+            
             waitCounter -= Time.deltaTime;
             
             if (waitCounter < 0)
