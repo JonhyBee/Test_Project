@@ -3,71 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum ItemType {DimeBag}
+public enum ItemType { DimeBag,Extasy,Turd, YourMother }
 
-public class Item : MonoBehaviour 
-
+public abstract class Item : MonoBehaviour
 {
-    public Renderer Inv { get; set; }
-    
-    public Inventory inventory;
+  public abstract ItemType itemType { get; }
+  public abstract string DisplayName { get; }
 
-    public ItemType type;
+  public abstract void Use();
+  public abstract List<string> GenerateActionList();
 
-    public List<string> ActionList;
+  public int maxStackSize = 1;
 
-    public Sprite spriteNeutral;
+  public Renderer Inv { get; set; }
 
-    public Sprite spriteHighlighted;
+  public Sprite spriteNeutral;
+  public Sprite spriteHighlighted;
+  
+  void OnMouseOver()
+  {
+    Component halo = GetComponent("Halo");
+    halo.GetType().GetProperty("enabled").SetValue(halo, true, null);
 
-    public int maxSize; //Max stack size
-
-    public void Use()
+    if (Input.GetMouseButtonDown(0))
     {
-        switch (type)
-        {
-            case ItemType.DimeBag:
-                Debug.Log("I just ate a gram of weed, it doesn't taste very good.");
-                break;
-            default:
-                break;
-        }
-
+      Debug.Log("OpenDropDownMenu");
     }
+  }
 
-    public List<string> GenerateActionList()
-    {
-        switch (type)
-        {
-            case ItemType.DimeBag:
-                ActionList = new List<string>() { "Pick-Up", "Use", "Inspect" };
-                break;
-            default:
-                break;
-        }
+  void OnMouseExit()
+  {
 
-        return ActionList;
-    }
+    Component halo = GetComponent("Halo");
+    halo.GetType().GetProperty("enabled").SetValue(halo, false, null);
+
+  }
 
 
-    void OnMouseOver()
-    {
-        Component halo = GetComponent("Halo");
-        halo.GetType().GetProperty("enabled").SetValue(halo, true, null);
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("OpenDropDownMenu");
-        }
-    }
-
-    void OnMouseExit()
-    {
-
-        Component halo = GetComponent("Halo");
-        halo.GetType().GetProperty("enabled").SetValue(halo, false, null);
-        
-    }
-
- 
 }
+

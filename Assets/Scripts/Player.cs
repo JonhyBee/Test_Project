@@ -5,73 +5,73 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    Animator a;
-    public float speed;
-    bool right;
+  Animator a;
+  public float speed;
+  bool right;
 
-    public Inventory inventory;
+  public Inventory inventory { get; set; }
 
-    void Start()
+  void Start()
+  {
+    a = GetComponent<Animator>();
+  }
+
+  void Flip()
+  {
+    Vector3 scale = transform.localScale;
+    scale.x *= -1;
+    transform.localScale = scale;
+    right = !right;
+  }
+
+  // Update is called once per frame
+  void Update()
+
+  {
+    HandleMovement();
+  }
+
+  private void HandleMovement()
+  {
+    a.SetBool("Walking", false);
+    if (Input.GetKey(KeyCode.D))
     {
-        a = GetComponent<Animator>();
+      if (right == false)
+      {
+        Flip();
+      }
+      a.SetBool("Walking", true);
+      transform.Translate(Vector2.right * speed);
     }
 
-    void Flip()
+    if (Input.GetKey(KeyCode.A))
     {
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
-        right = !right;
+      if (right == true)
+      {
+        Flip();
+      }
+      a.SetBool("Walking", true);
+      transform.Translate(Vector2.left * speed);
     }
 
-    // Update is called once per frame
-    void Update()
-
+    if (Input.GetKey(KeyCode.W))
     {
-        HandleMovement();
+      a.SetBool("Walking", true);
+      transform.Translate(Vector2.up * speed);
     }
 
-    private void HandleMovement()
+    if (Input.GetKey(KeyCode.S))
     {
-        a.SetBool("Walking", false);
-        if (Input.GetKey(KeyCode.D))
-        {
-            if (right == false)
-            {
-                Flip();
-            }
-            a.SetBool("Walking", true);
-            transform.Translate(Vector2.right * speed);
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            if (right == true)
-            {
-                Flip();
-            }
-            a.SetBool("Walking", true);
-            transform.Translate(Vector2.left * speed);
-        }
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            a.SetBool("Walking", true);
-            transform.Translate(Vector2.up * speed);
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            a.SetBool("Walking", true);
-            transform.Translate(Vector2.down * speed);
-        }
+      a.SetBool("Walking", true);
+      transform.Translate(Vector2.down * speed);
     }
+  }
 
-    private void OnTriggerEnter(Collider other)
+  private void OnTriggerEnter(Collider other)
+  {
+    if (other.tag == "Item")
     {
-        if (other.tag == "Item")
-        {
-            inventory.AddItem(other.GetComponent<Item>());
-        }
+      inventory.AddItem(other.GetComponent<Item>());
     }
+  }
 }
