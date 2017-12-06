@@ -1,13 +1,15 @@
 fileFormatVersion: 2
 guid: e0f8768c24f30684e93757d23eefae39
-timeCreated: 1502992115
+timeCreated: 1512526730
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Slot_selected
     21300002: Slot_notselected
-    21300004: bag_selected
-    21300006: bag_notselected
+    21300004: coke_bag_selected
+    21300006: coke_bag_notselected
+    21300008: dime_bag_selected
+    21300010: dime_bag_notselected
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -82,12 +84,12 @@ TextureImporter:
       name: Slot_selected
       rect:
         serializedVersion: 2
-        x: 42
-        y: 704
-        width: 263
-        height: 255
+        x: 74
+        y: 713
+        width: 276
+        height: 262
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -96,38 +98,66 @@ TextureImporter:
       name: Slot_notselected
       rect:
         serializedVersion: 2
-        x: 389
+        x: 412
         y: 709
-        width: 253
-        height: 245
+        width: 279
+        height: 266
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: bag_selected
+      name: coke_bag_selected
       rect:
         serializedVersion: 2
-        x: 65
-        y: 367
+        x: 72
+        y: 428
         width: 263
         height: 255
       alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: coke_bag_notselected
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 422
+        width: 265
+        height: 262
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: dime_bag_selected
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 83
+        width: 287
+        height: 272
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: bag_notselected
+      name: dime_bag_notselected
       rect:
         serializedVersion: 2
-        x: 388
-        y: 382
-        width: 253
-        height: 245
+        x: 408
+        y: 98
+        width: 277
+        height: 262
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

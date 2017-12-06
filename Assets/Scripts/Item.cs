@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum ItemType { DimeBag,Extasy,Turd, YourMother }
+public enum ItemType { DimeBag,Coke,Heroin,Hashish,Ecstasy }
 
 public abstract class Item : MonoBehaviour
 {

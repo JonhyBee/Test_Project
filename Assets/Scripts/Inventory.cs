@@ -46,12 +46,8 @@ public class Inventory : MonoBehaviour
 
   private static GameObject hoverObject;
 
-
-
-
-  public Canvas canvas;
-
   private CanvasGroup canvasGroup;
+  public Canvas canvas;
 
   private bool fadingIn;
   private bool fadingOut;
@@ -59,6 +55,8 @@ public class Inventory : MonoBehaviour
   public float fadeTime;
 
   private static Inventory instance;
+
+  public static bool inventoryIsOpen; 
 
   private static GameObject clicked;
 
@@ -78,12 +76,6 @@ public class Inventory : MonoBehaviour
     return slots.Any(s => s.Items.Any(i => i.itemType == itemType));
   }
 
-
-  public CanvasGroup CanvasGroup
-  {
-    get { return GameObject.FindObjectOfType<Player>().inventory.canvasGroup; }
-  }
-
   //Cree une instance the l'inventaire pour pouvoir acceder a ces proprieter a partir de d'autres classes
   public Inventory Instance
   {
@@ -98,11 +90,27 @@ public class Inventory : MonoBehaviour
 
   }
 
+  public CanvasGroup CanvasGroup
+  {
+    get
+    {
+      return canvasGroup;
+    }
+
+    set
+    {
+      canvasGroup = value;
+    }
+  }
+
+
+
+
   // Use this for initialization
   void Start()
   {
 
-    canvasGroup = transform.parent.GetComponent<CanvasGroup>();
+    CanvasGroup = transform.parent.GetComponent<CanvasGroup>();
 
     CreateLayout();
 
@@ -110,6 +118,7 @@ public class Inventory : MonoBehaviour
 
     var player = GameObject.FindObjectOfType<Player>();
     player.inventory = this;
+    inventoryIsOpen = false;
 
   }
 
@@ -134,6 +143,7 @@ public class Inventory : MonoBehaviour
     if (Input.GetKeyDown(KeyCode.I))
     {
       this.ToggleVisibility();
+      inventoryIsOpen =! inventoryIsOpen;
     }
 
     if (hoverObject != null) //check is hover object exist
@@ -156,8 +166,8 @@ public class Inventory : MonoBehaviour
     //summon up the renderer for our Main canvas (where the inventory is drawn)
     CanvasRenderer InvRend = GetComponent<CanvasRenderer>();
 
-    //check if inventory is currently open, its present in the frame by default at execution right now
-    if (CanvasGroup.alpha > 0)
+    //check if inventory is currently open
+    if (inventoryIsOpen)
     {
       //if it was open we close it
       StartCoroutine("FadeOut");
@@ -292,7 +302,7 @@ public class Inventory : MonoBehaviour
       }
     }
 
-    else if (from == null && canvasGroup.alpha == 1 && !Input.GetKey(KeyCode.LeftShift)) //If we have not already picked up something and not splitting this stack
+    else if (from == null && inventoryIsOpen && !Input.GetKey(KeyCode.LeftShift)) //If we have not already picked up something and not splitting this stack
     {
       if (!clicked.GetComponent<Slot>().IsEmpty && !GameObject.Find("Hover")) //if the slot we clicked is NOT empty
       {
@@ -437,7 +447,7 @@ public class Inventory : MonoBehaviour
       fadingIn = false;
       StopCoroutine("FadeIn");
 
-      float startAlpha = CanvasGroup.alpha;
+      float startAlpha = canvasGroup.alpha;
 
       float rate = 1.0f / fadeTime;
 
@@ -445,12 +455,12 @@ public class Inventory : MonoBehaviour
 
       while (progress < 1.0)
       {
-        CanvasGroup.alpha = Mathf.Lerp(startAlpha, 0, progress);
+        canvasGroup.alpha = Mathf.Lerp(startAlpha, 0, progress);
         progress += rate * Time.deltaTime;
         yield return null; //this runs constantly and doest return anything
       }
 
-      CanvasGroup.alpha = 0;
+      canvasGroup.alpha = 0;
       fadingOut = false;
     }
   }
@@ -463,7 +473,7 @@ public class Inventory : MonoBehaviour
       fadingIn = true;
       StopCoroutine("FadeOut");
 
-      float startAlpha = CanvasGroup.alpha;
+      float startAlpha = canvasGroup.alpha;
 
       float rate = 1.0f / fadeTime;
 
@@ -471,12 +481,12 @@ public class Inventory : MonoBehaviour
 
       while (progress < 1.0)
       {
-        CanvasGroup.alpha = Mathf.Lerp(startAlpha, 1, progress); //lerping??? apparament sa marche
+        canvasGroup.alpha = Mathf.Lerp(startAlpha, 1, progress); //lerping??? apparament sa marche
         progress += rate * Time.deltaTime;
         yield return null; //this runs constantly and doest return anything
       }
 
-      CanvasGroup.alpha = 1;
+      canvasGroup.alpha = 1;
       fadingIn = false;
     }
   }

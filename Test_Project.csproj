@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.1.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -82,9 +80,12 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\DropDownMenu.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
-    <Compile Include="Assets\Scripts\Items\Extasy.cs" />
-    <Compile Include="Assets\Scripts\Items\DimeBag.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
+    <Compile Include="Assets\Scripts\Items\Coke.cs" />
+    <Compile Include="Assets\Scripts\Items\DimeBag.cs" />
+    <Compile Include="Assets\Scripts\Items\Ecstasy.cs" />
+    <Compile Include="Assets\Scripts\Items\Hashish.cs" />
+    <Compile Include="Assets\Scripts\Items\Heroin.cs" />
     <Compile Include="Assets\Scripts\NPCcontroller.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Slot.cs" />
